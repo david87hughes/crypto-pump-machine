@@ -5,19 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Pump Machine</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Orbitron', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #0e0e0e;
+            background: linear-gradient(to right, #000428, #004e92);
             color: white;
             text-align: center;
+            overflow-x: hidden;
         }
         header {
-            background: #ff9800;
+            background: rgba(0, 0, 0, 0.7);
             padding: 20px;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 3px solid #ff9800;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px #ff9800; }
+            50% { box-shadow: 0 0 30px #ff9800; }
+            100% { box-shadow: 0 0 10px #ff9800; }
         }
         section {
             padding: 50px 20px;
@@ -29,53 +39,95 @@
             text-decoration: none;
             font-size: 18px;
             border-radius: 5px;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background: #e65100;
+            transform: scale(1.1);
         }
         .roadmap, .tokenomics {
-            background: #1a1a1a;
+            background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             margin-top: 20px;
+            border-radius: 10px;
         }
-        footer {
-            background: #222;
-            padding: 20px;
-            font-size: 14px;
+        .ticker {
+            background: black;
+            color: lime;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0 0 20px lime;
+            animation: marquee 10s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        canvas {
+            display: block;
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
-    <header>Crypto Pump Machine</header>
+    <header>🚀 Crypto Pump Machine 🚀</header>
+    
+    <div class="ticker">LIVE MARKET PRICE: CPM TOKEN 🚀 Loading...</div>
     
     <section>
-        <h1>Welcome to Crypto Pump Machine</h1>
-        <p>The next big crypto revolution. Join us today!</p>
+        <h1>Welcome to the Future of Crypto 🚀</h1>
+        <p>Join the Crypto Pump Machine revolution! The most futuristic, high-tech, and game-changing crypto project.</p>
         <a href="#buy" class="button">How to Buy</a>
     </section>
     
+    <canvas id="chartCanvas" width="600" height="300"></canvas>
+    
     <section class="tokenomics">
-        <h2>Tokenomics</h2>
+        <h2>📈 Tokenomics</h2>
         <p>Total Supply: 1,000,000,000 $CPM</p>
         <p>Taxes: 5% Buy, 5% Sell</p>
-        <p>Liquidity Locked for Security</p>
+        <p>Liquidity Locked 🔒</p>
     </section>
     
     <section id="buy">
-        <h2>How to Buy</h2>
-        <p>Step 1: Install MetaMask or Trust Wallet</p>
-        <p>Step 2: Add Binance Smart Chain Network</p>
-        <p>Step 3: Swap BNB for $CPM on PancakeSwap</p>
+        <h2>💰 How to Buy</h2>
+        <p>✅ Install MetaMask or Trust Wallet</p>
+        <p>✅ Add Binance Smart Chain Network</p>
+        <p>✅ Swap BNB for $CPM on PancakeSwap</p>
+        <a href="https://pancakeswap.finance" class="button">Buy Now</a>
     </section>
     
     <section class="roadmap">
-        <h2>Roadmap</h2>
-        <p>Phase 1: Token Launch 🚀</p>
-        <p>Phase 2: Marketing & Community Growth 🌍</p>
-        <p>Phase 3: CEX Listings & Partnerships 🤝</p>
+        <h2>🌍 Roadmap</h2>
+        <p>🔥 Phase 1: Token Launch</p>
+        <p>💎 Phase 2: Marketing & Community Growth</p>
+        <p>🚀 Phase 3: CEX Listings & Major Partnerships</p>
     </section>
     
     <footer>
-        <p>Follow us on <a href="#">Twitter</a> | <a href="#">Telegram</a> | <a href="#">Discord</a></p>
+        <p>Follow us: <a href="#">🐦 Twitter</a> | <a href="#">💬 Telegram</a> | <a href="#">📢 Discord</a></p>
         <p>&copy; 2025 Crypto Pump Machine. All rights reserved.</p>
     </footer>
+    
+    <script>
+        const ctx = document.getElementById('chartCanvas').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [{
+                    label: 'CPM Price',
+                    data: [10, 30, 20, 40, 50],
+                    borderColor: '#ff9800',
+                    backgroundColor: 'rgba(255, 152, 0, 0.2)',
+                    fill: true
+                }]
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
-
