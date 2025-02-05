@@ -10,11 +10,31 @@
             font-family: 'Orbitron', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #000428, #004e92);
+            background: black;
             color: white;
             text-align: center;
             overflow-x: hidden;
         }
+        
+        /* Animated Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://source.unsplash.com/1600x900/?cyberpunk,technology') no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: -1;
+            animation: pulseBg 10s infinite alternate;
+        }
+        
+        @keyframes pulseBg {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.5; }
+        }
+        
         header {
             background: rgba(0, 0, 0, 0.7);
             padding: 20px;
@@ -22,35 +42,51 @@
             font-weight: bold;
             text-transform: uppercase;
             border-bottom: 3px solid #ff9800;
-            animation: pulse 1.5s infinite;
+            animation: glowHeader 1.5s infinite alternate;
         }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 10px #ff9800; }
-            50% { box-shadow: 0 0 30px #ff9800; }
-            100% { box-shadow: 0 0 10px #ff9800; }
+        
+        @keyframes glowHeader {
+            0% { text-shadow: 0 0 10px #ff9800; }
+            100% { text-shadow: 0 0 30px #ff9800; }
         }
+        
         section {
             padding: 50px 20px;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
         }
+        
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
         .button {
-            background: #ff9800;
+            background: linear-gradient(145deg, #ff9800, #e65100);
             padding: 15px 30px;
             color: white;
             text-decoration: none;
             font-size: 18px;
-            border-radius: 5px;
+            border-radius: 10px;
             transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.6);
+            transform: perspective(100px) rotateX(10deg);
         }
+        
         .button:hover {
-            background: #e65100;
-            transform: scale(1.1);
+            background: linear-gradient(145deg, #e65100, #ff9800);
+            transform: perspective(100px) rotateX(0deg) scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.8);
         }
+        
         .roadmap, .tokenomics {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             margin-top: 20px;
             border-radius: 10px;
         }
+        
         .ticker {
             background: black;
             color: lime;
@@ -62,13 +98,10 @@
             box-shadow: 0 0 20px lime;
             animation: marquee 10s linear infinite;
         }
+        
         @keyframes marquee {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
-        }
-        canvas {
-            display: block;
-            margin: 20px auto;
         }
     </style>
 </head>
@@ -80,7 +113,7 @@
     <section>
         <h1>Welcome to the Future of Crypto 🚀</h1>
         <p>Join the Crypto Pump Machine revolution! The most futuristic, high-tech, and game-changing crypto project.</p>
-        <a href="#buy" class="button">How to Buy</a>
+        <a href="#buy" class="button" onclick="playSound()">How to Buy</a>
     </section>
     
     <canvas id="chartCanvas" width="600" height="300"></canvas>
@@ -97,7 +130,7 @@
         <p>✅ Install MetaMask or Trust Wallet</p>
         <p>✅ Add Binance Smart Chain Network</p>
         <p>✅ Swap BNB for $CPM on PancakeSwap</p>
-        <a href="https://pancakeswap.finance" class="button">Buy Now</a>
+        <a href="https://pancakeswap.finance" class="button" onclick="playSound()">Buy Now</a>
     </section>
     
     <section class="roadmap">
@@ -112,22 +145,11 @@
         <p>&copy; 2025 Crypto Pump Machine. All rights reserved.</p>
     </footer>
     
+    <audio id="buttonSound" src="https://www.fesliyanstudios.com/play-mp3/4384"></audio>
     <script>
-        const ctx = document.getElementById('chartCanvas').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-                datasets: [{
-                    label: 'CPM Price',
-                    data: [10, 30, 20, 40, 50],
-                    borderColor: '#ff9800',
-                    backgroundColor: 'rgba(255, 152, 0, 0.2)',
-                    fill: true
-                }]
-            }
-        });
+        function playSound() {
+            document.getElementById('buttonSound').play();
+        }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
